@@ -11,3 +11,5 @@ script:
   - ./gradlew build test
   - cd  $TRAVIS_BUILD_DIR/src/Clients
   - ./gradlew build
+
+dist: trusty

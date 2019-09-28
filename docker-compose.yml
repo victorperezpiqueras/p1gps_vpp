@@ -5,48 +5,48 @@ services:
 #mongo: mismo nombre usado en el run.sh de Order y application.properties.
 #Se resuelve en una dirección IP
 
-	mongo:
-		image: paberlo/p1gps:db
-		deploy: 
-			replicas: 1 # para escalabilidad del servicio.
-			resources:
-				limits:
-					cpus: "0.15"
-					memory: 200M
-			restart_policy:
-				condition: on-failure #reiniciar el contenedor si falla
-	ports:
-		#mapeo el Puerto del contenedor(derecha) con 		#el puerto del host del servicio (izquierda)
-			- "28017:28017"
-			- "27017:27017"
-		volumes:
-			- "db.data:/data/db" # para dar persistencia a la sesión
-	order:
-		image: paberlo/p1gps:order
-		depends_on:
-			- "mongo" #le pasamos al servicio order la ip del servicio mongo
-		deploy:
-			replicas: 1
-			resources:
-				limits:
-					cpus: "0.3"
-					memory: "500M"
-			restart_policy:
-				condition: on-failure
-		ports:
-			- "8080:8080"
-	
-	web:
-		image: paberlo/p1gps:web
-		deploy:
-			replicas: 1
-			resources:
-				limits:
-					cpus: "0.25"
-					memory: 300M
-			restart_policy:
-				condition: on-failure
-		ports:
-			- "80:8080"
+ mongo:
+  image: paberlo/p1gps:db
+  deploy: 
+   replicas: 1 # para escalabilidad del servicio.
+   resources:
+    limits:
+     cpus: "0.15"
+     memory: 200M
+   restart_policy:
+    condition: on-failure #reiniciar el contenedor si falla
+ ports:
+  #mapeo el Puerto del contenedor(derecha) con   #el puerto del host del servicio (izquierda)
+   - "28017:28017"
+   - "27017:27017"
+  volumes:
+   - "db.data:/data/db" # para dar persistencia a la sesión
+ order:
+  image: paberlo/p1gps:order
+  depends_on:
+   - "mongo" #le pasamos al servicio order la ip del servicio mongo
+  deploy:
+   replicas: 1
+   resources:
+    limits:
+     cpus: "0.3"
+     memory: "500M"
+   restart_policy:
+    condition: on-failure
+  ports:
+   - "8080:8080"
+ 
+ web:
+  image: paberlo/p1gps:web
+  deploy:
+   replicas: 1
+   resources:
+    limits:
+     cpus: "0.25"
+     memory: 300M
+   restart_policy:
+    condition: on-failure
+  ports:
+   - "80:8080"
 volumes:
-	db-data:
+ db-data:

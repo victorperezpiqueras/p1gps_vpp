@@ -20,7 +20,7 @@ services:
    - "28017:28017"
    - "27017:27017"
   volumes:
-   - "db.data:/data/db" # para dar persistencia a la sesión
+   - "db-data:/data/db" # para dar persistencia a la sesión
  order:
   image: victorperez98/p1gps:order
   depends_on:

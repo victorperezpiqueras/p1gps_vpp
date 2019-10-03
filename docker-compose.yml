@@ -6,7 +6,7 @@ services:
 #Se resuelve en una dirección IP
 
  mongo:
-  image: paberlo/p1gps:db
+  image: victorperez98/p1gps:db
   deploy: 
    replicas: 1 # para escalabilidad del servicio.
    resources:
@@ -22,7 +22,7 @@ services:
   volumes:
    - "db.data:/data/db" # para dar persistencia a la sesión
  order:
-  image: paberlo/p1gps:order
+  image: victorperez98/p1gps:order
   depends_on:
    - "mongo" #le pasamos al servicio order la ip del servicio mongo
   deploy:
@@ -37,7 +37,7 @@ services:
    - "8080:8080"
  
  web:
-  image: paberlo/p1gps:web
+  image: victorperez98/p1gps:web
   deploy:
    replicas: 1
    resources:
